@@ -1,0 +1,124 @@
+.\" ASTRAL(1) Manual Page
+.TH ASTRAL 1 "Astaraxia" "Astral Package Manager"
+.SH NAME
+astral \- package manager for the Astaraxia Linux distribution
+
+.SH SYNOPSIS
+.B astral
+[\-s | \-\-sync]
+[\-r | \-\-removedep]
+[\-R | \-\-remove]
+[\-y | \-\-all]
+[\-bin | \-\-binary]
+[\-comp | \-\-compile]
+[package...]
+
+.SH DESCRIPTION
+.B astral
+is the unified package manager for the Astaraxia Linux distribution.
+It supports installing software either from prebuilt binary packages or
+via source compilation using deterministic, declarative build recipes.
+
+Astral maintains a local database of installed packages, resolves
+dependencies, manages conflicts, and provides reproducible, transparent
+build outputs.
+
+All package definitions are stored as
+.BR .astral
+recipes that describe sources, build instructions, and file installation
+rules.
+
+.SH COMMANDS
+
+.TP
+.BR -s ", " --sync
+Synchronize the local package database with the official Astaraxia
+repository. If package names are provided, install or upgrade them.
+
+.TP
+.BR -r ", " --removedep
+Remove a package and all dependencies that were installed exclusively
+for that package.
+
+.TP
+.BR -R ", " --remove
+Remove a package without affecting its dependencies.
+
+.TP
+.BR -y ", " --all
+Upgrade all installed packages. Binary or source mode is determined by
+global configuration or per-package flags.
+
+.TP
+.BR -bin ", " --binary
+Install the specified package(s) from prebuilt binary packages.
+
+.TP
+.BR -comp ", " --compile
+Install the specified package(s) by fetching sources and compiling them
+locally using the package recipe.
+
+.SH CONFIGURATION
+Astral reads its configuration from:
+.PP
+.RS
+.B /etc/astral/config
+.RE
+.PP
+Configuration options include:
+.IP \[bu] 2
+default install mode (binary, source, or mixed)
+.IP \[bu] 2
+compiler flags and optimization settings
+.IP \[bu] 2
+repository URLs
+.IP \[bu] 2
+build sandbox configuration
+.IP \[bu] 2
+cache and storage directories
+
+.SH FILES
+.TP
+.B /usr/src/astral/recipes/
+Official package recipes.
+
+.TP
+.B /var/cache/astral/src/
+Source archive cache.
+
+.TP
+.B /var/cache/astral/bin/
+Binary package cache.
+
+.TP
+.B /var/lib/astral/db/
+Installed package metadata.
+
+.TP
+.B /etc/astral/config
+System-wide configuration for Astral.
+
+.SH EXIT STATUS
+.TP
+0
+Operation completed successfully.
+.TP
+1
+General error.
+.TP
+2
+Recipe error or missing dependencies.
+.TP
+3
+Repository synchronization failed.
+.TP
+4
+Build failure during source compilation.
+
+.SH SEE ALSO
+.BR make (1),
+.BR ld (1),
+.BR gcc (1)
+
+.SH AUTHOR
+Astaraxia Project
