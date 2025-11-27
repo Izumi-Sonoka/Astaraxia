@@ -1,71 +1,95 @@
-# Astaraxia
+# Astaraxia  
+*A flexible, source–binary hybrid Linux distribution for transparency, configurability, and reproducibility*
 
-Astaraxia is a flexible, source–binary hybrid Linux distribution focused on transparency, configurability, and reproducibility.  
-The system provides complete control over build configuration while remaining straightforward to maintain (or not).
+## Table of Contents  
+- [Overview](#overview)  
+- [Key Features](#key-features)  
+- [Status](#status)  
+- [Installation / Bootstrapping](#installation--bootstrapping)  
+- [Usage Examples](#usage-examples)  
+- [Configuration](#configuration)  
+- [Directory Layout](#directory-layout)  
+- [Goals](#goals)  
+- [Roadmap / TODO](#roadmap--todo)  
+- [Contributing](#contributing)  
+- [License](#license)
 
-# Astaraxia Devs
-Me
+## Overview  
+(blurb what Astaraxia is, what makes it special compared to other distros)
 
-## Key Features
+## Key Features  
+- Hybrid build model: binary and source packages via Astral  
+- Transparent build recipes (source URLs, build steps, packaging rules, dependencies, options)  
+- Minimal base system from LFS, fully rebuildable  
+- Fine-grained configuration, reproducibility, clean toolchain  
 
-### Hybrid Build Model
-Astaraxia allows users to install software in two ways:
-- **Binary packages** for fast installation
-- **Source builds** for maximum control, optimization, and reproducibility
+## Status  
+Currently bootstraping via LFS (CH8, GCC 15.2.0), no core packages yet (or list which are ready) — under active development
 
-Both modes are unified under a single package manager: **Astral**.
+## Installation / Bootstrapping  
+### Prerequisites  
+- Host system requirements: x86_64 CPU (or list), RAM, disk space, Internet  
+- Required tools (e.g. a working shell, ability to compile)  
 
-### Astral Package Manager
-Astral is a deterministic package manager providing:
-- Explicit, modular build recipes
-- Dependency resolution with clear conflict detection
-- Binary or source installation per package
-- Fine-grained control of compile flags and features
-- A readable recipe format (`.astral`)
+### Steps  
+1. Download and extract LFS sources …  
+2. Follow LFS book chapter 1–8 (or link)  
+3. Once you have a minimal toolchain: run `…`  
+4. Install Astral (from source or binary) — `…`  
+5. Use Astral to install bootstrap packages:  
+   ```sh
+   astral -c base-system  # compile and install base from source  
+   ```  
+6. (Optional) switch to desired init system: systemd / OpenRC  
 
-### Transparent Build System
-All package definitions are simple scripts describing:
-- Source URLs  
-- Build steps  
-- Packaging rules  
-- Dependencies  
-- Optional features  
-- Service integration (systemd or OpenRC)
+## Usage Examples  
+```sh
+# Install binary package  
+astral -s vim  
 
-Users can inspect and modify any part of the build process.
+# Compile and install from source (with custom flags)  
+astral -c firefox  
 
-### Minimal Base System
-Astaraxia is bootstrapped from Linux From Scratch (LFS) to guarantee:
-- A clean, well-defined filesystem hierarchy  
-- A reproducible toolchain and standard libraries  
-- A known, traceable build order
+# Remove package with dependencies  
+astral -r package_name  
 
-After bootstrap, all packages—including the base—can be rebuilt through Astral.
+# Remove just package  
+astral -R package_name  
 
-## Directory Layout
+# Upgrade all installed packages  
+astral -y  
+```  
 
-- /usr/src/astral/recipes/    # Official recipe tree
-- /etc/astral/config          # Package manager configuration
-- /var/cache/astral/src/      # Cached source archives
-- /var/cache/astral/bin/      # Cached binary packages
-- /var/lib/astral/db/         # Installed package metadata
+## Configuration  
+Describe config file `/etc/astral/config`, sample contents, how to override default flags, choose compile options, enable/dis­able optional features, select init system, etc.
 
+## Directory Layout  
+```
+/usr/src/astral/recipes/      # official recipe tree  
+/etc/astral/config            # manager configuration  
+/var/cache/astral/src/        # cached source archives  
+/var/cache/astral/bin/        # cached binary packages  
+/var/lib/astral/db/           # installed package metadata  
+```  
 
+## Goals  
+- Provide a fully transparent build system — no hidden steps  
+- Offer unified package management (binary + source)  
+- Preserve reproducibility with explicit metadata  
+- Keep the system predictable, clean, and maintainable  
 
-## Goals
-- Provide a configurable environment without hidden build steps
-- Offer a unified system for both binary and source-managed software
-- Maintain long-term reproducibility through explicit metadata
-- Keep the system predictable, consistent, and maintainable
+## Roadmap / TODO  
+- Finish LFS bootstrap (CH: ___)  
+- Provide core packages: kernel, glibc (or alternate libc), shell, basic utilities  
+- Add support for optional init systems (systemd, OpenRC)  
+- Write documentation: installation guides, troubleshooting, package recipe standards  
+- Make first release, tag it, publish binary package repository  
 
-## Status
-Astaraxia is under active development.  
-The bootstrap system (LFS-based) must be completed before the first release.
+## Contributing  
+If you want to help:  
+- Write recipes under `/usr/src/astral/recipes/`  
+- Test builds on clean environment, report bugs or build failures  
+- Suggest improvements, submit patches, contribute docs  
 
-### Current status
-LFS CH8 GCC 15.2.0
-
-## License
-Astaraxia and Astral will adopt an open-source license compatible with the upstream software they package.  
-Unless otherwise specified, documentation and tooling are available under the MIT license.
-
+## License  
+Documentation and tooling under MIT license. For bundled packages, upstream licenses apply.  
