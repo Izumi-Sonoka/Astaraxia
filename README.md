@@ -74,6 +74,7 @@ astral -c firefox  # compile from source
 astral -r pkg      # remove package and its unused dependencies
 astral -R pkg      # remove package only
 astral -y          # upgrade all installed packages
+```
 
 ## Configuration
 Planned configuration will be stored in: 
@@ -95,4 +96,32 @@ Planned filesystem layout:
 /var/cache/astral/src/        # cached source archives  
 /var/cache/astral/bin/        # cached binary packages  
 /var/lib/astral/db/           # installed package metadata  
-/var/log/astral/              # logs for build failures and installs  
+/var/log/astral/              # logs for build failures and installs
+
+## Goals
+
+- Provide a fully transparent build system
+- Offer unified package management for both binary and source packages
+- Maintain reproducibility with explicit, auditable metadata
+- Keep the system predictable, minimal, and maintainable
+- Allow users to fully rebuild or inspect any component
+- Avoid unnecessary abstraction or hidden automation
+
+## Roadmap / TODO
+- Finish Linux From Scratch bootstrap (current: Chapter 8)
+- Implement Astral package manager (CLI + database + recipe parser)
+- Define recipe specification format
+- Build initial core packages (toolchain, libc, shell, base utilities)
+- Add support for init systems (systemd, OpenRC)
+- Provide documentation and usage guides
+- Prepare a minimal bootable ISO
+- Publish official binary package repository
+- Create developer documentation and naming conventions
+
+## Contributing
+Contributions, ideas, and discussions are welcome once core development begins.
+Guidelines will be added after the initial repository structure is finalized.
+
+## License
+Documentation and tooling are planned to be licensed under the MIT License.
+Upstream packages retain their respective licenses.
