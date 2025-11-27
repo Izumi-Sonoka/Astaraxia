@@ -1,5 +1,10 @@
 # Astaraxia  
-*A flexible, source–binary hybrid Linux distribution for transparency, configurability, and reproducibility*
+*A flexible, source–binary hybrid Linux distribution for transparency, configurability, and reproducibility.*
+
+> **Warning:**  
+> Astaraxia is currently an early-stage concept.  
+> The distribution, package manager, recipes, and build system **do not exist in a usable form yet**.  
+> Development will begin after the Linux From Scratch bootstrap is complete.
 
 ## Table of Contents  
 - [Overview](#overview)  
@@ -15,77 +20,79 @@
 - [License](#license)
 
 ## Overview  
-(what Astaraxia is, what makes it special compared to other distros)
+Astaraxia is a conceptual Linux distribution designed around a unified hybrid package model.  
+It aims to give users full control over their system by allowing both binary installations and fully transparent source builds through a custom package manager called **Astral**.
+
+While inspired by source-based distributions, Astaraxia intends to remain straightforward to maintain, predictable in behavior, and fully reproducible.  
+The project is currently in the planning phase.
 
 ## Key Features  
-- Hybrid build model: binary and source packages via Astral  
-- Transparent build recipes (source URLs, build steps, packaging rules, dependencies, options)  
-- Minimal base system from LFS, fully rebuildable  
-- Fine-grained configuration, reproducibility, clean toolchain  
+Planned features include:
+
+- Hybrid build model: install packages as binaries or compile from source  
+- Plain, transparent build recipes that users can inspect and modify  
+- Minimal base system created via Linux From Scratch  
+- Deterministic, reproducible build pipeline  
+- Unified package manager (Astral) for all software, base system included  
+
+These features are **not implemented yet**.
 
 ## Status  
-Currently bootstraping via LFS (CH8, GCC 15.2.0), no core packages yet (or list which are ready) — under active development
+Astaraxia is *not* a functional distribution.  
+The developer is currently working through the LFS bootstrap (Chapter 8, GCC 15.2.0, Test Suite).  
+Once the base system is complete, initial work on Astral and package recipes will begin.
+
+No ISO, no repositories, no packages, and no release currently exist.
 
 ## Installation / Bootstrapping  
-**This is just the idea, gonna make a minimal iso soon**
-### Prerequisites  
-- Host system requirements: x86_64 CPU (or list), RAM, disk space, Internet  
-- Required tools (e.g. a working shell, ability to compile)  
+Astaraxia cannot be installed yet.  
+This section describes the *planned* bootstrap process.
 
-### Steps  
-1. Download and extract LFS sources …  
-2. Follow LFS book chapter 1–8 (or link)  
-3. Once you have a minimal toolchain: run `…`  
-4. Install Astral (from source or binary) — `…`  
-5. Use Astral to install bootstrap packages:  
-   ```sh
-   astral -c base-system  # compile and install base from source  
-   ```  
-6. (Optional) switch to desired init system: systemd / OpenRC  
+### Prerequisites  
+- x86_64 CPU 
+- RAM suitable for compiling (8GB recommended)  
+- ~25GB free disk  
+- A working Linux system with compilation tools  
+- Internet access for sources
+
+### Planned Steps  
+1. Complete LFS Chapters 1–8 to build the initial toolchain.  
+2. Enter the chroot environment.  
+3. Clone the Astaraxia repository.  
+4. Build the Astral package manager.  
+5. Use Astral to install core packages and build the base system.  
+6. Optionally choose an init system (systemd or OpenRC).
+
+These steps are currently placeholders and will be updated once development begins.
 
 ## Usage Examples  
+Future examples for Astral might include:
+
 ```sh
-# Install binary package  
-astral -s vim  
+astral -s vim      # install from binary
+astral -c firefox  # compile from source
+astral -r pkg      # remove package and its unused dependencies
+astral -R pkg      # remove package only
+astral -y          # upgrade all installed packages
 
-# Compile and install from source (with custom flags)  
-astral -c firefox  
+## Configuration
+Planned configuration will be stored in: 
+/etc/astral/config
 
-# Remove package with dependencies  
-astral -r package_name  
+Expected tunable options:
+- Default source/binary behavior
+- Global CFLAGS / CXXFLAGS / LDFLAGS
+- Repository locations (official + user-defined)
+- Parallel build settings
+- Feature toggles for optional dependencies
+- Init system selection
+- Cache locations and cleanup policies
 
-# Remove just package  
-astral -R package_name  
-
-# Upgrade all installed packages  
-astral -y  
-```  
-
-## Configuration  
-Describe config file `/etc/astral/config`, sample contents, how to override default flags, choose compile options, enable/dis­able optional features, select init system, etc.
-
-## Directory Layout  
-```
-/usr/src/astral/recipes/      # official recipe tree  
-/etc/astral/config            # manager configuration  
+## Directory Layout
+Planned filesystem layout:
+/usr/src/astral/recipes/      # official package recipes  
+/etc/astral/config            # system-level configuration  
 /var/cache/astral/src/        # cached source archives  
 /var/cache/astral/bin/        # cached binary packages  
 /var/lib/astral/db/           # installed package metadata  
-```  
-
-## Goals  
-- Provide a fully transparent build system — no hidden steps  
-- Offer unified package management (binary + source)  
-- Preserve reproducibility with explicit metadata  
-- Keep the system predictable, clean, and maintainable  
-
-## Roadmap / TODO  
-- Finish LFS bootstrap (CH: ___)  
-- Provide core packages: kernel, glibc (or alternate libc), shell, basic utilities  
-- Add support for optional init systems (systemd, OpenRC)  
-- Write documentation: installation guides, troubleshooting, package recipe standards  
-- Make first release, tag it, publish binary package repository  
-- Minimal iso
-  
-## License  
-Documentation and tooling under MIT license. For bundled packages, upstream licenses apply.  
+/var/log/astral/              # logs for build failures and installs  
