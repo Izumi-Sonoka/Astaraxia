@@ -1,124 +1,130 @@
 .\" ASTRAL(1) Manual Page
-.TH ASTRAL 1 "Astaraxia" "Astral Package Manager"
+.TH ASTRAL 1 "Astaraxia Project" "Astral Package Manager" "User Commands"
+
 .SH NAME
-astral \- package manager for the Astaraxia Linux distribution
+astral \- hybrid source/binary package manager for the Astaraxia Linux distribution
 
 .SH SYNOPSIS
 .B astral
-[\-s | \-\-sync]
-[\-r | \-\-removedep]
-[\-R | \-\-remove]
-[\-y | \-\-all]
-[\-bin | \-\-binary]
-[\-comp | \-\-compile]
-[package...]
+[\-s|\-c|\-r|\-R|\-y] [package]
 
 .SH DESCRIPTION
-.B astral
-is the unified package manager for the Astaraxia Linux distribution.
-It supports installing software either from prebuilt binary packages or
-via source compilation using deterministic, declarative build recipes.
+.B Astral
+is the planned package manager for the Astaraxia Linux distribution.
+It provides a unified interface for installing, removing, inspecting,
+and building software packages, either from prebuilt binaries or 
+directly from source using transparent build recipes.
 
-Astral maintains a local database of installed packages, resolves
-dependencies, manages conflicts, and provides reproducible, transparent
-build outputs.
+This tool is not yet implemented.  
+All functionality described in this manual represents the intended
+design for the future Astaraxia package manager.
 
-All package definitions are stored as
-.BR .astral
-recipes that describe sources, build instructions, and file installation
-rules.
-
-.SH COMMANDS
+.SH MODES
 
 .TP
-.BR -s ", " --sync
-Synchronize the local package database with the official Astaraxia
-repository. If package names are provided, install or upgrade them.
+.BR \-s " package"
+Install a package from the binary repository.
+Downloads a prebuilt package if available and installs it along with all required dependencies.
 
 .TP
-.BR -r ", " --removedep
-Remove a package and all dependencies that were installed exclusively
-for that package.
+.BR \-c " package"
+Compile and install a package from source.
+Fetches the source archive, applies the recipe-defined patches,
+and builds the package according to the recipe instructions.
 
 .TP
-.BR -R ", " --remove
-Remove a package without affecting its dependencies.
+.BR \-r " package"
+Remove a package and any dependencies that are no longer required.
 
 .TP
-.BR -y ", " --all
-Upgrade all installed packages. Binary or source mode is determined by
-global configuration or per-package flags.
+.BR \-R " package"
+Remove only the specified package, leaving dependencies in place.
 
 .TP
-.BR -bin ", " --binary
-Install the specified package(s) from prebuilt binary packages.
-
-.TP
-.BR -comp ", " --compile
-Install the specified package(s) by fetching sources and compiling them
-locally using the package recipe.
+.BR \-y
+Upgrade all installed packages.
+Performs a full system update using binary packages or source builds
+depending on the global configuration.
 
 .SH CONFIGURATION
-Astral reads its configuration from:
+Astral reads configuration options from:
+
 .PP
-.RS
-.B /etc/astral/config
-.RE
+.I /etc/astral/config
+
 .PP
-Configuration options include:
-.IP \[bu] 2
-default install mode (binary, source, or mixed)
-.IP \[bu] 2
-compiler flags and optimization settings
-.IP \[bu] 2
-repository URLs
-.IP \[bu] 2
-build sandbox configuration
-.IP \[bu] 2
-cache and storage directories
+The configuration file controls:
+.IP \(bu 2
+default installation mode (binary or source)  
+.IP \(bu 2
+compiler flags (CFLAGS, CXXFLAGS, LDFLAGS)  
+.IP \(bu 2
+parallel build settings  
+.IP \(bu 2
+repository URLs (official + user-defined)  
+.IP \(bu 2
+optional dependency toggles  
+.IP \(bu 2
+cache locations for source and binary artifacts  
+.IP \(bu 2
+init system preference  
+
+A sample configuration file will be shipped once the tool is implemented.
+
+.SH RECIPE FORMAT
+Package recipes are stored under:
+
+.PP
+.I /usr/src/astral/recipes/
+
+.PP
+Each recipe directory contains:
+.IP \(bu 2
+metadata (name, version, license, homepage)  
+.IP \(bu 2
+source URL and hash  
+.IP \(bu 2
+dependency list  
+.IP \(bu 2
+build instructions  
+.IP \(bu 2
+optional feature toggles  
+.IP \(bu 2
+installation steps  
+
+Recipe syntax and guidelines will be defined with the first package set.
 
 .SH FILES
 .TP
-.B /usr/src/astral/recipes/
-Official package recipes.
+.I /etc/astral/config
+Main configuration file.
 
 .TP
-.B /var/cache/astral/src/
-Source archive cache.
+.I /var/cache/astral/src/
+Cached source archives.
 
 .TP
-.B /var/cache/astral/bin/
-Binary package cache.
+.I /var/cache/astral/bin/
+Cached binary packages.
 
 .TP
-.B /var/lib/astral/db/
+.I /var/lib/astral/db/
 Installed package metadata.
 
 .TP
-.B /etc/astral/config
-System-wide configuration for Astral.
+.I /var/log/astral/
+Build and installation logs.
 
 .SH EXIT STATUS
-.TP
-0
-Operation completed successfully.
-.TP
-1
-General error.
-.TP
-2
-Recipe error or missing dependencies.
-.TP
-3
-Repository synchronization failed.
-.TP
-4
-Build failure during source compilation.
+Astral will return 0 on success and non-zero on error.
 
 .SH SEE ALSO
-.BR make (1),
-.BR ld (1),
-.BR gcc (1)
+lfs(7), make(1), pkgbuild(5), emerge(1), xbps-src(1)
 
 .SH AUTHOR
 Astaraxia Project
+
+.SH NOTES
+Astral is currently a conceptual tool.
+This manual page describes intended functionality, not an existing implementation.
+
