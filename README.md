@@ -97,7 +97,8 @@ Expected tunable options:
 Planned filesystem layout:
 ```
 /usr/src/astral/recipes/      # official package recipes  
-/etc/astral/config            # system-level configuration  
+/etc/astral/config            # system-level configuration
+/etc/astral/config/$HOME/     # $HOME configuration
 /var/cache/astral/src/        # cached source archives  
 /var/cache/astral/bin/        # cached binary packages  
 /var/lib/astral/db/           # installed package metadata  
