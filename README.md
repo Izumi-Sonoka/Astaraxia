@@ -1,5 +1,5 @@
 # Astaraxia  
-*A flexible, source–binary hybrid Linux distribution for transparency, configurability, and reproducibility.*
+*A flexible, source-based Linux distribution that Aims for transparency, configurability, and reproducibility.*
 
 > **Warning:**  
 > Astaraxia is currently an early-stage concept.  
@@ -12,7 +12,6 @@ Im a just single dev, i dont have anyone to help me with. i dont know if i can d
 - [Key Features](#key-features)  
 - [Status](#status)  
 - [Installation / Bootstrapping](#installation--bootstrapping)  
-- [Usage Examples](#usage-examples)  
 - [Configuration](#configuration)  
 - [Directory Layout](#directory-layout)  
 - [Goals](#goals)  
@@ -30,9 +29,9 @@ The project is currently in the planning phase.
 ## Key Features  
 Planned features include:
 
-- Hybrid build model: install packages as binaries or compile from source  
+- Hybrid build model: install packages by compiling it from source  
 - Plain, transparent build recipes that users can inspect and modify  
-- Minimal base system created via Linux From Scratch  
+- Minimal base system created via Linux From Scratch  (yes the end game)
 - Deterministic, reproducible build pipeline  
 - Unified package manager (Astral) for all software, base system included  
 
@@ -51,30 +50,19 @@ This section describes the *planned* bootstrap process.
 
 ### Prerequisites  
 - x86_64 CPU 
-- RAM suitable for compiling (8GB or More recommended)  
+- RAM suitable for compiling (8GB or More is recommended)  
 - ~25GB free disk  
 - A working Linux system with compilation tools  
 - Internet access for sources
 
 ### Planned Steps  
-1. Complete LFS Chapters 1–8 to build the initial toolchain.  DONE
-2. Configure /etc, /usr, kernel and etc
-2. Build the Astral package manager.  
+1. Complete LFS Chapters 1–8 to build the initial toolchain. - DONE
+2. Configure /etc, /usr, kernel and etc - PARTIALY
+2. Build the Astral package manager. - 1/4
 3. Use Astral to install core packages and build the base system.  
 4. init system systemd.
 
 These steps are currently placeholders and will be updated once development begins.
-
-## Usage Examples  
-Future examples for Astral might include:
-
-```sh
-astral -s vim      # install from binary
-astral -c firefox  # compile from source
-astral -r pkg      # remove package and its unused dependencies
-astral -R pkg      # remove package only
-astral -y          # upgrade all installed packages
-```
 
 ## Configuration
 Planned configuration will be stored in: 
@@ -105,7 +93,7 @@ Planned filesystem layout:
 ## Goals
 
 - Provide a fully transparent build system
-- Offer unified package management for both binary and source packages
+- Offer unified package management for source
 - Maintain reproducibility with explicit, auditable metadata
 - Keep the system predictable, minimal, and maintainable
 - Allow users to fully rebuild or inspect any component
@@ -113,9 +101,9 @@ Planned filesystem layout:
 
 ## Roadmap / TODO
 - Finish Linux From Scratch bootstrap (current: Chapter 8) DONE
-- Implement Astral package manager (CLI + database + recipe parser)
-- Define recipe specification format
-- Build initial core packages (toolchain, libc, shell, base utilities)
+- Implement Astral package manager (CLI + database + recipe parser) 
+- Define recipe specification format - DONE
+- Build initial core packages (toolchain, libc, shell, base utilities) - DONE
 - Add support for init systemd
 - Provide documentation and usage guides
 - Prepare a minimal bootable ISO
