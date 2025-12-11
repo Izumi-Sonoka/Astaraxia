@@ -3,7 +3,7 @@
 
 > **Warning:**  
 > Astaraxia is currently in a early-stage.  
-> The distribution, package manager, recipes, and build system **do not exist in a usable form yet**.  
+> The distribution, and build system **do not exist in a usable form yet**.  
 
 Im a just single dev, i dont have anyone to help me with. i dont know if i can do all of this
 
