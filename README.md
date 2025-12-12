@@ -9,6 +9,7 @@ I'm just a single dev with too many ambitions and too little time. If I succeed,
 
 ## Table of Contents
 
+* [Astaraxia's Software](#astaraxias-software)
 * [Overview](#overview)
 * [Key Features](#key-features)
 * [Status](#status)
@@ -20,6 +21,16 @@ I'm just a single dev with too many ambitions and too little time. If I succeed,
 * [Roadmap / TODO](#roadmap--todo)
 * [Contributing](#contributing)
 * [License](#license)
+
+## Astaraxia's Software
+
+Astaraxia doesn’t come with much yet, because, well… I’m still one person and sleep is a scam. But here’s what exists (or will exist) to torture your brain in a fun way:
+
+* **Astral** – The source-based package manager written entirely in POSIX shell. Minimal, transparent, auditable, hackable, and never going to be rewritten in Rust.
+* **Aras** – The rollback maestro, written entirely in POSIX shell (because why suffer in Rust?). Handles system rewinds with surgical precision, and yes, it’s never being rewritten in Rust.
+* **Future tools** – Build helpers, auditing scripts, quirky CLI utilities… all manual, all inspectable, all likely to make you question your life choices.
+
+Every tool follows the same philosophy: if you can’t read it, you shouldn’t be using it. Inspectable, auditable, and painfully transparent—because why make it easy when you can make it *educational*?
 
 ## Overview
 
@@ -123,7 +134,7 @@ Astaraxia’s package manager, Astral, is heavily influenced by three distros I 
 | Predictable builds               | ✅           | ✅     | ✅                  |
 | Source-based control             | ⚠️          | ⚠️    | ✅                  |
 | Binary convenience               | ⚠️          | ✅     | 🔧 Planned         |
-| Rollbacks / transactional safety | ⚠️          | ✅     | 🔧 In Development         |
+| Rollbacks / transactional safety | ⚠️          | ✅     | 🔧 In Development  |
 | Declarative config               | ⚠️          | ✅     | 🔧 Planned         |
 | Package recipes / ebuild-like    | ✅           | ⚠️    | ✅                  |
 
